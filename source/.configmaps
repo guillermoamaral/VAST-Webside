@@ -1,0 +1,38 @@
+[
+	{
+		#conditions : [
+			{
+				#condition : 'true',
+				#requiredMaps : [
+					{
+						#name : 'z.ST: Regex',
+						#versionName : 'V 10.0.0  [480]',
+						#ts : 3791806875
+					},
+					{
+						#name : 'z.ST: JSON Support',
+						#versionName : 'V 10.0.0  [480]',
+						#ts : 3791806874
+					},
+					{
+						#name : 'z.ST: Server Smalltalk (SST) - HTTP',
+						#versionName : 'V 10.0.0  [480]',
+						#ts : 3791806875
+					}
+				]
+			}
+		],
+		#ts : 3793258977,
+		#comment : '',
+		#formatVersion : '1.1',
+		#applications : OrderedCollection [
+			{
+				#name : 'WebsideApp',
+				#versionName : '1.0',
+				#ts : 3793021622
+			}
+		],
+		#name : 'Webside',
+		#versionName : '1.1'
+	}
+]
