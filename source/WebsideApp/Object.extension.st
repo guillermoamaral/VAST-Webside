@@ -5,7 +5,7 @@ Extension {
 { #category : '*WebsideApp',
  #vaCategories : ['Not categorized'] }
 Object >> asWebsideJson [
-	^Dictionary new
+	^NeoJSONObject new
 		at: 'class' put: self class name;
 		at: 'indexable' put: self class isVariable;
 		at: 'size'

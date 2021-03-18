@@ -18,7 +18,7 @@ URLTemplate class >> on: aString [
 
 { #category : 'Not categorized' }
 URLTemplate >> = anObject [
-	^anObject class == self class and: [pattern input = anObject pattern input]
+	^anObject class == self class and: [pattern = anObject pattern]
 ]
 
 { #category : 'Not categorized',
@@ -52,7 +52,7 @@ URLTemplate >> hasDescription [
 
 { #category : 'Not categorized' }
 URLTemplate >> hash [
-	^pattern input hash
+	^pattern hash
 
 ]
 
@@ -74,7 +74,8 @@ URLTemplate >> initializePattern [
 	| uri |
 	uri := sample copy.
 	parameters keysDo: [:i | uri segmentAt: i put: '*'].
-	pattern := StringPattern on: uri path
+	pattern := String streamContents: [:strm |
+		uri segments do: [:s | strm nextPutAll: '\/'. s = '*' ifTrue: [strm nextPutAll: '[^/]+'] ifFalse: [strm nextPutAll: s]]]
 ]
 
 { #category : 'Not categorized',
@@ -89,7 +90,7 @@ URLTemplate >> initializeSample [
 { #category : 'Not categorized',
   #vaVisibility : 'private' }
 URLTemplate >> matches: anURL [
-	(pattern matches: anURL relativeUri) ifFalse: [^false].
+	(anURL relativeUri matchesRegex: pattern) ifFalse: [^false].
 	^(raw last = $*) or: [sample segments size + 1 = anURL segments size]
 ]
 

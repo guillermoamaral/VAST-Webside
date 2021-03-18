@@ -7,7 +7,7 @@ Extension {
 CompiledMethod >> asWebsideJson [
 	| source |
 	source := self sourceString copyWithout: 10 asCharacter.
-	^Dictionary new
+	^NeoJSONObject new
 		at: 'selector' put: selector;
 		at: 'class' put: self methodClass name;
 		at: 'category' put: nil;

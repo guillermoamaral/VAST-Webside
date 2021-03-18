@@ -267,7 +267,7 @@ URL >> host [
 
 { #category : 'Not categorized' }
 URL >> host: aString [
-	host := (aString notNil and: [aString beginsWith: '['])
+	host := (aString notNil and: [aString first = $[])
 		ifTrue: [aString allButFirst allButLast]
 		ifFalse: [aString].
 	host notNil ifTrue: [host := host asLowercase]

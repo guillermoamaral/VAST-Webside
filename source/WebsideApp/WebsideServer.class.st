@@ -1,3 +1,9 @@
+"
+WebsideServer new
+	port: 9003;
+	baseUri: '/vast';
+	start
+"
 Class {
 	#name : 'WebsideServer',
 	#superclass : 'Object',
@@ -53,7 +59,7 @@ WebsideServer >> handleRequest: request with: response [
 					response header: result header.
 					response contents: result contents]
 				ifFalse: [ | payload |
-					payload := JsonWriter write: result.
+					payload := NeoJSONWriter toString: result.
 					response header
 						status: SstHttpConstants::HttpOk;
 						contentType: 'application/json; charset=utf-8'.

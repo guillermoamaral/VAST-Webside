@@ -1,4 +1,4 @@
 Package {
 	#name : 'WebsideApp',
-	#vaPrerequisites : ['SstHttpServerSupport']
+	#vaPrerequisites : ['NeoJSONCoreApp','RegexCoreApp','SstHttpServerSupport']
 }

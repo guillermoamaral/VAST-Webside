@@ -13,7 +13,7 @@ WebsideAPI >> categories [
 	| class |
 	class := self requestedClass.
 	class ifNil: [^self notFound].
-	^(class methodCategories collect: [:c | c name]) asArray
+	^(class methodCategories collect: [:c | c]) asArray
 
 ]
 
