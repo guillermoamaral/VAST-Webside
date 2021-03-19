@@ -22,18 +22,18 @@
 				]
 			}
 		],
-		#ts : 3793542815,
+		#ts : 3793604158,
 		#comment : '',
 		#formatVersion : '1.1',
 		#applications : OrderedCollection [
 			{
 				#name : 'WebsideApp',
-				#versionName : '1.2',
-				#ts : 3793442544
+				#versionName : '1.3',
+				#ts : 3793604047
 			}
 		],
 		#name : 'Webside',
-		#versionName : '1.2'
+		#versionName : '1.3'
 	},
 	{
 		#conditions : [
@@ -47,23 +47,23 @@
 					},
 					{
 						#name : 'Webside',
-						#versionName : '1.2',
-						#ts : 3793542815
+						#versionName : '1.3',
+						#ts : 3793604158
 					}
 				]
 			}
 		],
-		#ts : 3793542874,
+		#ts : 3793604213,
 		#comment : '',
 		#formatVersion : '1.1',
 		#applications : OrderedCollection [
 			{
 				#name : 'WebsideTestsApp',
-				#versionName : '1.2',
-				#ts : 3793338286
+				#versionName : '1.1',
+				#ts : 3793603758
 			}
 		],
 		#name : 'Webside Tests',
-		#versionName : '1.2.1'
+		#versionName : '1.4'
 	}
 ]

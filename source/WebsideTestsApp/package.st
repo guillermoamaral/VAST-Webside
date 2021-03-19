@@ -1,4 +1,4 @@
 Package {
 	#name : 'WebsideTestsApp',
-	#vaPrerequisites : ['SUnit','WebsideApp']
+	#vaPrerequisites : ['NeoJSONCoreApp','SUnit','WebsideApp']
 }

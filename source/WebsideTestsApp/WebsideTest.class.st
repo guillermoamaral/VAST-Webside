@@ -3,46 +3,75 @@ Class {
 	#superclass : 'TestCase',
 	#instVars : [
 		'client',
-		'server'
+		'server',
+		'uri'
 	],
 	#category : 'WebsideTestsApp'
 }
 
 { #category : 'running',
   #vaVisibility : 'private' }
-WebsideTest >> get: uri [
-	| data |
-	data := client get: uri.
-	^data notNil ifTrue: [NeoJSONObject fromString: data]
+WebsideTest >> get: relativeUri [
+
+	| responseMsg data |
+
+	client startUp isSstError ifTrue: [self error: 'Error'].
+	[responseMsg := client get: uri , '/' , relativeUri] ensure: [client shutDown].
+	(responseMsg isSstError or: [responseMsg isNil]) ifTrue: [self error: 'Error'].
+	data := responseMsg basicContents.
+	^ NeoJSONObject fromString: data
 ]
 
 { #category : 'running',
   #vaVisibility : 'private' }
-WebsideTest >> post: uri [
-	^self post: uri with: ''
+WebsideTest >> post: relativeUri [
+
+	^self post: relativeUri with: ''
 ]
 
 { #category : 'running',
   #vaVisibility : 'private' }
-WebsideTest >> post: uri with: body [
-	| data |
-	data := client post: uri with: body asString.
-	^data notNil ifTrue: [NeoJSONObject fromString: data]
+WebsideTest >> post: relativeUri with: body [
+
+	| responseMsg data |
+
+	client startUp isSstError ifTrue: [self error: 'Error'].
+	[responseMsg := client post: body asString typed: 'application/json' at: uri , '/' , relativeUri]
+		ensure: [client shutDown].
+	(responseMsg isSstError or: [responseMsg isNil]) ifTrue: [self error: 'Error'].
+	data := responseMsg basicContents.
+	^NeoJSONObject fromString: data
 ]
 
 { #category : 'running',
   #vaVisibility : 'private' }
 WebsideTest >> setUp [
+
+	| host port baseUri |
+
 	super setUp.
-	client := SstHttpClient forTransportScheme: 'http://localhost:9876/WebsideTests'.
-	server := WebsideServer new port: 9876; baseUri: '/WebsideTests'; start
+	host := 'localhost'.
+	port := 9876.
+	baseUri := '/WebsideTests'.
+	uri := 'http://', host, ':', port asString, baseUri.		
+	client := SstHttpClient forTransportScheme: 'httpl'.
+	WebsideServer allInstancesDo: [:each | each stop].
+	server :=
+		WebsideServer new
+			port: port;
+			baseUri: baseUri;
+			start.
+	
+
+
 ]
 
 { #category : 'running',
   #vaVisibility : 'private' }
 WebsideTest >> tearDown [
 	super tearDown.
-	server stop
+	server stop.
+	client shutDown.
 ]
 
 { #category : 'code endpoints' }
