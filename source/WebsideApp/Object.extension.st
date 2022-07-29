@@ -2,8 +2,7 @@ Extension {
 	#name : 'Object'
 }
 
-{ #category : '*WebsideApp',
- #vaCategories : ['Not categorized'] }
+{ #category : 'Not categorized' }
 Object >> asWebsideJson [
 	^NeoJSONObject new
 		at: 'class' put: self class name;

@@ -2,8 +2,7 @@ Extension {
 	#name : 'Collection'
 }
 
-{ #category : '*WebsideApp',
- #vaCategories : ['Not categorized'] }
+{ #category : 'Not categorized' }
 Collection >> groupBy: aspect [
 	| answer key copy remove |
 	answer := Dictionary new.

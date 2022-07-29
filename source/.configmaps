@@ -6,18 +6,18 @@
 				#requiredMaps : [
 					{
 						#name : 'z.ST: Regex',
-						#versionName : 'V 10.0.0  [480]',
-						#ts : 3791806875
+						#versionName : 'V 11.0.1  [513]',
+						#ts : 3834696272
 					},
 					{
 						#name : 'z.ST: JSON Support',
-						#versionName : 'V 10.0.0  [480]',
-						#ts : 3791806874
+						#versionName : 'V 11.0.1  [513]',
+						#ts : 3834696270
 					},
 					{
 						#name : 'z.ST: Server Smalltalk (SST) - HTTP',
-						#versionName : 'V 10.0.0  [480]',
-						#ts : 3791806875
+						#versionName : 'V 11.0.1  [513]',
+						#ts : 3834696273
 					}
 				]
 			}
@@ -28,8 +28,8 @@
 		#applications : OrderedCollection [
 			{
 				#name : 'WebsideApp',
-				#versionName : '1.3',
-				#ts : 3793604047
+				#versionName : '3e20bfc-main',
+				#ts : 3836559581
 			}
 		],
 		#name : 'Webside',
@@ -42,8 +42,8 @@
 				#requiredMaps : [
 					{
 						#name : 'z.ST: SUnit',
-						#versionName : 'V 10.0.0  [480]',
-						#ts : 3791806875
+						#versionName : 'V 11.0.1  [513]',
+						#ts : 3834696276
 					},
 					{
 						#name : 'Webside',
@@ -59,8 +59,8 @@
 		#applications : OrderedCollection [
 			{
 				#name : 'WebsideTestsApp',
-				#versionName : '1.1',
-				#ts : 3793603758
+				#versionName : '3e20bfc-main',
+				#ts : 3836559587
 			}
 		],
 		#name : 'Webside Tests',

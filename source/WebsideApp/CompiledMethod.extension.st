@@ -2,8 +2,7 @@ Extension {
 	#name : 'CompiledMethod'
 }
 
-{ #category : '*WebsideApp',
- #vaCategories : ['Not categorized'] }
+{ #category : 'Not categorized' }
 CompiledMethod >> asWebsideJson [
 	| source |
 	source := self sourceString copyWithout: 10 asCharacter.

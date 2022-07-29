@@ -1,7 +1,8 @@
 | loader path |
-path := (CfsPath named: '<insert path to root VAST-Webside local repo here>').
+path := (CfsPath named: 'C:\Users\guillermo.amaral\OneDrive - Quorum Business Solutions\Gamaral\Webside\servers\vast\VAST-Webside').
 loader := TonelLoader readFromPath: path.
 loader
 	beUnattended;
-	useGitVersion.
+	useGitVersion;
+	resolveToLatestConfigMaps.
 loader loadAllMapsWithRequiredMaps.

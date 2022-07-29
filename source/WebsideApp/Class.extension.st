@@ -2,8 +2,7 @@ Extension {
 	#name : 'Class'
 }
 
-{ #category : '*WebsideApp',
- #vaCategories : ['Not categorized'] }
+{ #category : 'Not categorized' }
 Class >> asWebsideJson [
 	| definition |
 	definition := self definitionString copyWithout: 10 asCharacter.
