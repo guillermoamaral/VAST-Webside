@@ -47,23 +47,23 @@
 					},
 					{
 						#name : 'Webside',
-						#versionName : '1.3',
-						#ts : 3793604158
+						#versionName : '1.4',
+						#ts : 3836560978
 					}
 				]
 			}
 		],
-		#ts : 3793604213,
+		#ts : 3836561412,
 		#comment : '',
 		#formatVersion : '1.1',
 		#applications : OrderedCollection [
 			{
 				#name : 'WebsideTestsApp',
-				#versionName : '3e20bfc-main',
-				#ts : 3836559587
+				#versionName : '1.0',
+				#ts : 3836561348
 			}
 		],
 		#name : 'Webside Tests',
-		#versionName : '1.4'
+		#versionName : '1.5'
 	}
 ]

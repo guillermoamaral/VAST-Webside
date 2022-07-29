@@ -143,7 +143,7 @@ WebsideTest >> testClassVariables [
 WebsideTest >> testDialect [
 	| dialect |
 	dialect := self get: 'dialect'.
-	self assert: dialect = 'Bee'
+	self assert: dialect = 'VA Smalltalk'
 ]
 
 { #category : 'code endpoints' }

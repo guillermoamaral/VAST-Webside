@@ -8,7 +8,7 @@ Class {
 	#category : 'WebsideApp'
 }
 
-{ #category : 'Not categorized' }
+{ #category : 'code endpoints' }
 WebsideAPI >> categories [
 	| class |
 	class := self requestedClass.
@@ -17,7 +17,7 @@ WebsideAPI >> categories [
 
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'code endpoints' }
 WebsideAPI >> classDefinition [
 	| class |
 	class := self requestedClass.
@@ -25,7 +25,7 @@ WebsideAPI >> classDefinition [
 	^class asWebsideJson
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'code endpoints' }
 WebsideAPI >> classes [
 	| root tree classes names depth json |
 	root := self queryAt: 'root'.
@@ -77,7 +77,7 @@ WebsideAPI >> classTreeFrom: aClass depth: anInteger [
 	^json
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'code endpoints' }
 WebsideAPI >> classVariables [
 	| class variables |
 	class := self requestedClass.
@@ -99,7 +99,7 @@ WebsideAPI >> defaultRootClass [
 	^Object
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'code endpoints' }
 WebsideAPI >> dialect [
 	^'VA Smalltalk'
 ]
@@ -170,7 +170,7 @@ WebsideAPI >> implementorsOf: aSymbol [
 	^ scope allMethodsNamed:  aSymbol 
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'code endpoints' }
 WebsideAPI >> instanceVariables [
 	| class variables |
 	class := self requestedClass.
@@ -187,7 +187,7 @@ WebsideAPI >> instanceVariables [
 	^variables asArray
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'code endpoints' }
 WebsideAPI >> method [
 	| class selector |
 	class := self requestedClass.
@@ -198,7 +198,7 @@ WebsideAPI >> method [
 	^(class >> selector) asWebsideJson
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'code endpoints' }
 WebsideAPI >> methods [
 	| selector methods senders global references class |
 	selector := self queriedSelector.
@@ -232,7 +232,7 @@ WebsideAPI >> notFound [
 	^#HttpServerResponse notFound
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'code endpoints' }
 WebsideAPI >> project [
 	| package |
 	package := self requestedProject.
@@ -240,7 +240,7 @@ WebsideAPI >> project [
 	^package asWebsideJson
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'code endpoints' }
 WebsideAPI >> projects [
 	^#()
 ]
@@ -365,7 +365,7 @@ WebsideAPI >> server: aWebsideServer [
 	server := aWebsideServer
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'code endpoints' }
 WebsideAPI >> subclasses [
 	| class |
 	class := self requestedClass.
@@ -381,7 +381,7 @@ WebsideAPI >> urlAt: aString [
 	^arguments at: aString ifAbsent: []
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'code endpoints' }
 WebsideAPI >> variables [
 	| class |
 	class := self requestedClass.
