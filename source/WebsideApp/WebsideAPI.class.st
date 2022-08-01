@@ -233,15 +233,15 @@ WebsideAPI >> notFound [
 ]
 
 { #category : 'code endpoints' }
-WebsideAPI >> project [
+WebsideAPI >> package [
 	| package |
-	package := self requestedProject.
+	package := self requestedPackage.
 	package ifNil: [^self notFound].
 	^package asWebsideJson
 ]
 
 { #category : 'code endpoints' }
-WebsideAPI >> projects [
+WebsideAPI >> packages [
 	^#()
 ]
 
@@ -323,7 +323,7 @@ WebsideAPI >> referencesTo: aClass [
 	^ Object allMethodsReferencingLiteral: aClass
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'accessing' }
 WebsideAPI >> request: anHttpRequest [
 	request := anHttpRequest
 ]
@@ -338,7 +338,7 @@ WebsideAPI >> requestedClass [
 
 { #category : 'Not categorized',
   #vaVisibility : 'private' }
-WebsideAPI >> requestedProject [
+WebsideAPI >> requestedPackage [
 	| name |
 	name := self urlAt: 'name'.
 	^name ifNotNil: [#PackageManager current packageNamed: name ifNone: []]
@@ -360,7 +360,7 @@ WebsideAPI >> sendersOf: aSymbol [
 	^scope allMethodsSending: aSymbol
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'accessing' }
 WebsideAPI >> server: aWebsideServer [
 	server := aWebsideServer
 ]
