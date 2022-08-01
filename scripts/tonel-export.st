@@ -6,3 +6,4 @@ writer
 	addLatestConfigurationMapNamed: 'Webside Tests';
 	addApplicationsFromConfigurationMaps.
 writer writeProjectInto: path.
+
