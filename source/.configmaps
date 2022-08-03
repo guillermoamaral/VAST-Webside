@@ -22,18 +22,18 @@
 				]
 			}
 		],
-		#ts : 3836836102,
+		#ts : 3836992348,
 		#comment : '',
 		#formatVersion : '1.1',
 		#applications : OrderedCollection [
 			{
 				#name : 'WebsideApp',
-				#versionName : '1.2.1',
-				#ts : 3836835491
+				#versionName : '1.1.1',
+				#ts : 3836992235
 			}
 		],
 		#name : 'Webside',
-		#versionName : '1.5.1'
+		#versionName : '1.5.2'
 	},
 	{
 		#conditions : [

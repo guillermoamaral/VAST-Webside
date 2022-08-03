@@ -101,7 +101,7 @@ WebsideAPI >> defaultRootClass [
 
 { #category : 'code endpoints' }
 WebsideAPI >> dialect [
-	^'VA Smalltalk'
+	^'VAST'
 ]
 
 { #category : 'Not categorized',
@@ -233,15 +233,15 @@ WebsideAPI >> notFound [
 ]
 
 { #category : 'code endpoints' }
-WebsideAPI >> package [
+WebsideAPI >> project [
 	| package |
-	package := self requestedPackage.
+	package := self requestedProject.
 	package ifNil: [^self notFound].
 	^package asWebsideJson
 ]
 
 { #category : 'code endpoints' }
-WebsideAPI >> packages [
+WebsideAPI >> projects [
 	^#()
 ]
 
@@ -323,7 +323,7 @@ WebsideAPI >> referencesTo: aClass [
 	^ Object allMethodsReferencingLiteral: aClass
 ]
 
-{ #category : 'accessing' }
+{ #category : 'Not categorized' }
 WebsideAPI >> request: anHttpRequest [
 	request := anHttpRequest
 ]
@@ -338,7 +338,7 @@ WebsideAPI >> requestedClass [
 
 { #category : 'Not categorized',
   #vaVisibility : 'private' }
-WebsideAPI >> requestedPackage [
+WebsideAPI >> requestedProject [
 	| name |
 	name := self urlAt: 'name'.
 	^name ifNotNil: [#PackageManager current packageNamed: name ifNone: []]
@@ -360,7 +360,7 @@ WebsideAPI >> sendersOf: aSymbol [
 	^scope allMethodsSending: aSymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'Not categorized' }
 WebsideAPI >> server: aWebsideServer [
 	server := aWebsideServer
 ]
