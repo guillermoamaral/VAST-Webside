@@ -328,7 +328,7 @@ WebsideAPI >> queryAt: aString ifPresent: aBlock [
   #vaVisibility : 'private' }
 WebsideAPI >> queryAt: aString ifPresent: aBlock ifAbsent: anotherBlock [
 	| value |
-	value := request at: aString ifAbsent: nil.
+	value := request header url asURL queryAt: aString.
 	value ifNil: [ ^ anotherBlock value ].
 	^ aBlock notNil
 		ifTrue: [ aBlock value: value ]
