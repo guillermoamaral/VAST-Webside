@@ -1,3 +1,9 @@
+"
+self startServer
+
+self stopServer
+
+"
 Class {
 	#name : 'WebsideAPI',
 	#superclass : 'Object',
@@ -39,13 +45,13 @@ WebsideAPI >> classes [
 		depth := depth notNil ifTrue: [depth := depth asNumber].
 		json := self classTreeFrom: root depth: depth.
 		^Array with: json].
-	classes := root withAllSubclasses asArray.
+	classes := root withAllSubclasses reject: [:c | c isMeta ].
 	names := self queryAt: 'names'.
 	names = 'true' ifTrue: [^(classes collect: [:c | c name]) sort].
 	^classes collect: [:c | c asWebsideJson]
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> classNamed: aString [
 	| name suffix metaclass class |
@@ -57,7 +63,8 @@ WebsideAPI >> classNamed: aString [
 	^metaclass ifTrue: [class class] ifFalse: [class]
 ]
 
-{ #category : 'Not categorized' }
+{ #category : 'services',
+  #vaVisibility : 'private' }
 WebsideAPI >> classTreeFrom: aClass depth: anInteger [
 	| json subclasses depth names |
 	names := self queryAt: 'names'.
@@ -93,7 +100,7 @@ WebsideAPI >> classVariables [
 	^variables asArray
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> defaultRootClass [
 	^Object
@@ -104,7 +111,7 @@ WebsideAPI >> dialect [
 	^'VAST'
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> filterByCategory: aCollection [
 	| category |
@@ -114,7 +121,7 @@ WebsideAPI >> filterByCategory: aCollection [
 		ifFalse: [aCollection]
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> filterByVariable: aCollection [
 	| grouped filtered variable filter |
@@ -162,7 +169,7 @@ WebsideAPI >> filterByVariable: aCollection [
 	^filter ifTrue: [filtered] ifFalse: [aCollection]
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> implementorsOf: aSymbol [
 	| scope |
@@ -226,7 +233,7 @@ WebsideAPI >> methods [
 	^(methods collect: [:m | m asWebsideJson]) asArray
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> notFound [
 	^#HttpServerResponse notFound
@@ -245,79 +252,90 @@ WebsideAPI >> packages [
 	^#()
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> queriedAssigning [
 	^self queryAt: 'assigning'
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> queriedCategory [
-	| category |
-	category := self queryAt: 'category'.
-	^category ifNotNil: [category asSymbol]
+	^self queryAt: 'category' ifPresent: [:c | c asSymbol]
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> queriedClass [
-	| name |
-	name := self queryAt: 'class'.
-	^name ifNotNil: [self classNamed: name]
+	^self queryAt: 'class' ifPresent: [:n | self classNamed: n]
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> queriedReferencing [
 	^self queriedReferencingClass isNil ifTrue: [self queryAt: 'referencing']
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> queriedReferencingClass [
-	| name |
-	name := self queryAt: 'referencing'.
-	^name notNil ifTrue: [self classNamed: name]
+	^self queryAt: 'referencingClass' ifPresent: [:n | self classNamed: n ]
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> queriedScope [
-	| scope |
-	scope := self queryAt: 'scope'.
-	^scope ifNotNil: [self classNamed: scope]
+	^self queryAt: 'scope' ifPresent: [:s | self classNamed: s ]
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> queriedSelector [
-	| selector |
-	selector := self queryAt: 'selector'.
-	^selector "ifNotNil: [Compiler new findSelector: selector]"
+	^self queryAt: 'selector' ifPresent: [:s | s asSymbol]
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> queriedSending [
-	| selector |
-	selector := self queryAt: 'sending'.
-	^selector ifNotNil: [selector asSymbol]
+	^self queryAt: 'sending' ifPresent: [:s | s asSymbol]
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> queriedUsing [
 	^self queryAt: 'using'
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> queryAt: aString [
-	^request header url asURL queryAt: aString
+	^ self queryAt: aString ifAbsent: nil
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
+  #vaVisibility : 'private' }
+WebsideAPI >> queryAt: aString ifAbsent: aBlock [
+	^ self queryAt: aString ifPresent: nil ifAbsent: aBlock
+]
+
+{ #category : 'services',
+  #vaVisibility : 'private' }
+WebsideAPI >> queryAt: aString ifPresent: aBlock [
+	^ self queryAt: aString ifPresent: aBlock ifAbsent: nil
+]
+
+{ #category : 'services',
+  #vaVisibility : 'private' }
+WebsideAPI >> queryAt: aString ifPresent: aBlock ifAbsent: anotherBlock [
+	| value |
+	value := request at: aString ifAbsent: nil.
+	value ifNil: [ ^ anotherBlock value ].
+	^ aBlock notNil
+		ifTrue: [ aBlock value: value ]
+		ifFalse: [ value ]
+]
+
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> referencesTo: aClass [
 	^ Object allMethodsReferencingLiteral: aClass
@@ -328,7 +346,7 @@ WebsideAPI >> request: anHttpRequest [
 	request := anHttpRequest
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> requestedClass [
 	| name |
@@ -336,7 +354,7 @@ WebsideAPI >> requestedClass [
 	^name ifNotNil: [self classNamed: name]
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> requestedPackage [
 	| name |
@@ -344,7 +362,7 @@ WebsideAPI >> requestedPackage [
 	^name ifNotNil: [#PackageManager current packageNamed: name ifNone: []]
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> requestedSelector [
 	| selector |
@@ -352,7 +370,7 @@ WebsideAPI >> requestedSelector [
 	^selector ifNotNil: [selector asSymbol]
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> sendersOf: aSymbol [
 	| scope |
@@ -373,7 +391,7 @@ WebsideAPI >> subclasses [
 	^(class subclasses collect: [:c | c asWebsideJson]) asArray
 ]
 
-{ #category : 'Not categorized',
+{ #category : 'services',
   #vaVisibility : 'private' }
 WebsideAPI >> urlAt: aString [
 	| arguments |
